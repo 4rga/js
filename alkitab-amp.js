@@ -1,0 +1,1 @@
+(function(){"use strict";function n(){var e=document.body||document.documentElement;e&&console.log("jalan")}("complete"===document.readyState||"interactive"===document.readyState)?n():document.addEventListener("DOMContentLoaded",n)})();
