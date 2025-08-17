@@ -1,18 +1,15 @@
 (function () {
   'use strict';
 
-  // ====== CONFIG ======
+  // ====== CONFIG: tujuan link ======
   function buildUrl(refText) {
     var q = encodeURIComponent(refText.trim());
     return 'https://alkitab.mobi/passage.php?passage=' + q;
   }
 
-  // ====== NodeFilter fallback (AMP worker) ======
-  var SHOW_TEXT = (self.NodeFilter && self.NodeFilter.SHOW_TEXT) ? self.NodeFilter.SHOW_TEXT : 4;
-
-  // ====== Traversal setup ======
-  var SKIP_TAGS = { 'A':1, 'CODE':1, 'PRE':1, 'SCRIPT':1, 'STYLE':1, 'TEXTAREA':1, 'SELECT':1 };
-  function isAmpTag(tn){ return tn && tn.toLowerCase().indexOf('amp-') === 0; }
+  // ====== Traversal (tanpa NodeFilter) ======
+  var SKIP_TAGS = { A:1, CODE:1, PRE:1, SCRIPT:1, STYLE:1, TEXTAREA:1, SELECT:1 };
+  function isAmpTag(tag){ return tag && tag.toLowerCase().indexOf('amp-') === 0; }
   function shouldSkipElement(el){
     if (!el || el.nodeType !== 1) return true;
     var tn = el.tagName;
@@ -27,19 +24,20 @@
       if (!el || el.nodeType !== 1) continue;
       if (shouldSkipElement(el) && el !== rootEl) continue;
 
+      // iterasi child
       for (var i=0;i<el.childNodes.length;i++){
         var n = el.childNodes[i];
-        if (n.nodeType === 3){
+        if (n.nodeType === 3){            // TEXT_NODE
           cb(n);
-        } else if (n.nodeType === 1){
+        } else if (n.nodeType === 1){     // ELEMENT_NODE
           if (!shouldSkipElement(n)) stack.push(n);
         }
       }
     }
   }
 
-  // ====== Daftar kitab (lengkap & singkatan umum Indonesia) ======
-  // mendukung: titik setelah singkatan (Mrk.), tanpa spasi setelah angka (1Kor), atau pakai spasi (1 Korintus)
+  // ====== Daftar kitab (ID lengkap + singkatan umum) ======
+  // dukung: angka romawi/arab di depan, titik opsional setelah singkatan, spasi opsional
   var books =
     // PL
     'Kej(?:adian)?|Kel(?:uaran)?|Im(?:amat)?|Bil(?:angan)?|Ul(?:angan)?|' +
@@ -62,28 +60,24 @@
     '(?:1|I)\\s*Yoh(?:anes)?|(?:2|II)\\s*Yoh(?:anes)?|(?:3|III)\\s*Yoh(?:anes)?|' +
     'Yud(?:as)?|Why|Wahyu';
 
-  // Titik opsional setelah singkatan: ubah "Mrk" -> "Mrk\\.?" via post-proses sederhana
-  books = books.replace(/([A-Za-z]{2,3})(\\\?:)?/g, '$1$2');
-
-  // ====== Regex ayat ======
-  // Bentuk: [angka optional] Kitab [spasi optional] Pasal [: Ayat[-Ayat]].
-  // Menangkap: "1Kor 13:4-7", "1 Korintus 13:4–7", "Efesus 2:8-9", "Mrk. 1:1", "Roma 8", "Yoh 3:16".
+  // ====== Regex referensi ======
+  // Contoh yang terdeteksi:
+  // 1Kor 13:4-7, 1 Kor 13:4–7, Ef 2:8-9, Mrk. 1:1, Roma 8, Yoh 3:16
   var verseRe = new RegExp(
-    // ^— tidak dipakai, biar bisa muncul di tengah kalimat
-    '(?:^|[^\\w])' +                // left boundary longgar (bukan huruf/angka) biar "Mat 5:9" tetap kena di dalam kalimat
+    '(?:^|[^\\w])' +                 // batas kiri longgar (bukan huruf/angka) agar match di tengah kalimat
     '(' +
       '(?:(?:1|I|2|II|3|III)\\s*)?' + // ordinal opsional
       '(?:' + books + ')' +          // nama kitab
-      '\\.?' +                       // titik opsional setelah singkatan (Mrk.)
+      '\\.?' +                       // titik opsional setelah singkatan
     ')' +
-    '\\s*' +                         // spasi opsional antara kitab dan pasal
+    '\\s*' +                         // spasi opsional
     '(\\d{1,3})' +                   // pasal
     '(?:' +
       '\\s*:\\s*' +                  // : ayat
       '(\\d{1,3})' +                 // ayat awal
       '(?:\\s*[-–]\\s*(\\d{1,3}))?' +// rentang ayat opsional
     ')?' +
-    '(?![\\w])'                      // right boundary longgar
+    '(?![\\w])'                      // batas kanan longgar
   , 'gim');
 
   function makeLink(refText) {
@@ -95,6 +89,21 @@
     return a;
   }
 
+  // bersihkan karakter bukan huruf/angka di awal/akhir match, contoh: "(Ef 2:8-9)" -> "Ef 2:8-9"
+  function cleanBoundary(s){
+    if (!s) return s;
+    // hapus spasi dulu
+    s = s.trim();
+    // hapus pembuka non-alfanumerik di depan
+    s = s.replace(/^[^A-Za-z0-9]+/, '');
+    // hapus penutup non-alfanumerik di belakang (kecuali tanda hubung dalam rentang sudah di-handle regex)
+    s = s.replace(/[^A-Za-z0-9)]+$/, function(tail){
+      // kalau tail cuma tanda tutup kurung/kutip/titik koma/komma/kolon titik dsb., hilangkan
+      return '';
+    });
+    return s.trim();
+  }
+
   function linkifyTextNode(tn) {
     var txt = tn.nodeValue;
     if (!txt) return 0;
@@ -104,22 +113,35 @@
 
     verseRe.lastIndex = 0;
     while ((m = verseRe.exec(txt)) !== null) {
-      var start = m.index + (m[0].length - m[0].replace(/^\s*/, '').length); // tidak dipakai ketat; kita pakai blok di bawah saja
       var matchStart = m.index;
       var matchEnd   = verseRe.lastIndex;
 
-      // teks sebelum match
+      // potongan sebelum match
       if (matchStart > last) {
         outFrag.appendChild(document.createTextNode(txt.slice(last, matchStart)));
       }
 
+      // potongan yang cocok
       var matchedText = txt.slice(matchStart, matchEnd);
-      outFrag.appendChild(makeLink(matchedText.trim()));
+      matchedText = cleanBoundary(matchedText);
+
+      if (matchedText) {
+        outFrag.appendChild(makeLink(matchedText));
+        made++;
+      } else {
+        // kalau entah kenapa kosong setelah dibersihkan, kembalikan teks aslinya saja
+        outFrag.appendChild(document.createTextNode(txt.slice(matchStart, matchEnd)));
+      }
+
       last = matchEnd;
-      made++;
     }
+
+    // sisa setelah match terakhir
+    if (last < txt.length) {
+      outFrag.appendChild(document.createTextNode(txt.slice(last)));
+    }
+
     if (made > 0) {
-      if (last < txt.length) outFrag.appendChild(document.createTextNode(txt.slice(last)));
       tn.parentNode.replaceChild(outFrag, tn);
     }
     return made;
@@ -135,13 +157,12 @@
   }
 
   function init() {
-    // Jika ada tombol manual (opsional)
-    var btn = document.getElementById('linkifyBtn');
-    if (btn) {
-      btn.addEventListener('click', function(){ runLinkifier(); });
-    }
-    // Fixed-height: jalankan otomatis
+    // otomatis (fixed-height) — langsung jalankan
     runLinkifier();
+
+    // opsional: tombol manual kalau kamu sediakan
+    var btn = document.getElementById('linkifyBtn');
+    if (btn) btn.addEventListener('click', runLinkifier);
   }
 
   if (document.readyState === 'loading') {
