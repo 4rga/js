@@ -1,1 +1,114 @@
-!function(){function e(){var e="genesis|gen|ge|exodus|exod|exo|ex|leviticus|lev|lv|numbers|num|nu|deuteronomy|deut|deu|dt|joshua|josh|jos|judges|judg|jdg|ruth|rut|ru|1\\s*samuel|1\\s*sam|1\\s*sa|i\\s*samuel|i\\s*sam|2\\s*samuel|2\\s*sam|2\\s*sa|ii\\s*samuel|ii\\s*sam|1\\s*kings|1\\s*kin|1\\s*kgs|1\\s*ki|i\\s*kings|i\\s*kin|2\\s*kings|2\\s*kin|2\\s*kgs|2\\s*ki|ii\\s*kings|ii\\s*kin|1\\s*chronicles|1\\s*chron|1\\s*chr|1\\s*ch|i\\s*chronicles|i\\s*chron|2\\s*chronicles|2\\s*chron|2\\s*chr|2\\s*ch|ii\\s*chronicles|ii\\s*chron|ezra|ezr|nehemiah|neh|esther|esth|est|job|psalms|psalm|ps|proverbs|prov|pr|ecclesiastes|eccl|ec|song\\s*of\\s*solomon|song\\s*of\\s*songs|songs|song|sos|isaiah|isa|is|jeremiah|jer|je|lamentations|lam|ezekiel|ezek|eze|daniel|dan|da|hosea|hos|ho|joel|joe|amos|amo|am|obadiah|oba|ob|jonah|jon|micah|mic|mi|nahum|nah|na|habakkuk|hab|zephaniah|zep|haggai|hag|zechariah|zec|za|malachi|mal|matthew|matt|mat|mt|mark|mar|mrk|mk|luke|luk|lk|john|joh|jhn|jn|acts|ac|romans|rom|ro|1\\s*corinthians|1\\s*cor|1\\s*co|i\\s*corinthians|i\\s*cor|2\\s*corinthians|2\\s*cor|2\\s*co|ii\\s*corinthians|ii\\s*cor|galatians|gal|ga|ephesians|eph|ep|philippians|phil|php|ph|colossians|col|co|1\\s*thessalonians|1\\s*thess|1\\s*thes|1\\s*the|1\\s*th|i\\s*thessalonians|i\\s*thess|2\\s*thessalonians|2\\s*thess|2\\s*thes|2\\s*the|2\\s*th|ii\\s*thessalonians|ii\\s*thess|1\\s*timothy|1\\s*tim|1\\s*ti|i\\s*timothy|i\\s*tim|2\\s*timothy|2\\s*tim|2\\s*ti|ii\\s*timothy|ii\\s*tim|titus|tit|philemon|phm|hebrews|heb|he|james|jas|jm|1\\s*peter|1\\s*pet|1\\s*pe|i\\s*peter|i\\s*pet|2\\s*peter|2\\s*pet|2\\s*pe|ii\\s*peter|ii\\s*pet|1\\s*john|1\\s*joh|1\\s*jhn|1\\s*jn|i\\s*john|i\\s*joh|2\\s*john|2\\s*joh|2\\s*jhn|2\\s*jn|ii\\s*john|ii\\s*joh|3\\s*john|3\\s*joh|3\\s*jhn|3\\s*jn|iii\\s*john|jude|jud|ju|revelation|rev|rv",t="kejadian|kej|keluaran|kel|imamat|im|bilangan|bil|ulangan|ul|yosua|yos|hakim-hakim|hak|rut|ru|1\\s*samuel|1\\s*sam|1\\s*sa|2\\s*samuel|2\\s*sam|2\\s*sa|i\\s*samuel|ii\\s*samuel|1\\s*raja|1\\s*raj|1\\s*raja-raja|2\\s*raja|2\\s*raj|2\\s*raja-raja|i\\s*raja|ii\\s*raja|1\\s*tawarikh|1\\s*taw|i\\s*tawarikh|2\\s*tawarikh|2\\s*taw|ii\\s*tawarikh|ezra|ezr|nehemia|neh|est|ester|ayub|ayb|mazmur|mzm|amsal|ams|pengkhotbah|pkh|kidung\\s*agung|kid|yesaya|yes|yeremia|yer|ratapan|rat|yehezkiel|yeh|hosea|hos|yoel|yl|amos|amo|obaja|oba|yunus|yun|mikha|mik|nahum|nah|habakuk|hab|zefanya|zef|hagai|hag|zakharia|za|maleakhi|mal|matius|mat|markus|mrk|mk|lukas|luk|yohanes|yoh|kisah\\s*(para\\s*)?rasul|kis|roma|rom|1\\s*korintus|1\\s*kor|2\\s*korintus|2\\s*kor|galatia|gal|efesus|ef|filipi|flp|kolose|kol|1\\s*tesalonika|1\\s*tes|2\\s*tesalonika|2\\s*tes|1\\s*timotius|1\\s*tim|2\\s*timotius|2\\s*tim|titus|tit|filemon|flm|ibrani|ibr|yakobus|yak|1\\s*petrus|1\\s*pet|2\\s*petrus|2\\s*pet|1\\s*yohanes|1\\s*yoh|2\\s*yohanes|2\\s*yoh|3\\s*yohanes|3\\s*yoh|yudas|yud|wahyu|why",n="ch|chr|chron|chronicles|co|cor|jhn|jn|jo|joh|john|kgs|ki|kin|kings|kor|pe|pet|peter|petrus|ptr|raj|raja|raja-raja|sa|sam|samuel|taw|tawarikh|tes|th|the|thes|thess|ti|tim|timothy|timotius|yoh|yohanes",o=(e+"|"+t).replace(/ /g,"\\s+"),r=new RegExp("\\b(?:"+n+")\\b\\.?\\s*$","i"),a=new RegExp("(^|\\b)(("+o+")\\.?\\s+)(\\d+(?:(?:–|—|-|:|(?:;\\s*\\d+:\\s*)|,|\\.|\\d|\\s*dan\\s*|\\s)+\\d+)?)(?!\\s*(?:"+n+")\\.?\\s)","i");function s(e){for(var s=e.nodeValue,c=!1,l=0;l++<1e3;){var d=a.exec(s);if(!d)break;var i=s.slice(0,d.index+d[1].length),u=d[2]+d[4],h=s.slice(d.index+d[0].length),m=e.splitText(i.length),p=m.splitText(u.length),f=document.createElement("a"),g=u.replace(/\./," "),v=function(e){var t=e.replace(/[.,;:]/g,"_").replace(/\s+/g," ").replace(/\n+/g," ").replace(/—|–/g,"-"),n=e.replace(/,\s*;/g,";").replace(/—|–/g,"-").replace(/\s+/g," ").replace(/\n+/g," ").replace(/\s*dan\s*(\d*:?)/gi,function(e,t){return t?";"+t:","}),o="https://www.theo.my.id/p/pencarian-alkitab.html?proses="+encodeURIComponent(n)+"&asal="+encodeURIComponent(location.href);return{href:o,id:v=t.replace(/[ ,;:]/g,"_")};var v}(g);f.setAttribute("href",v.href),f.setAttribute("id",v.id),f.setAttribute("passage",g),f.setAttribute("class","alkitab-link"),f.setAttribute("target","_blank"),f.setAttribute("rel","noopener"),f.appendChild(document.createTextNode(u)),m.parentNode.replaceChild(f,m),f.normalize(),e=p,s=e.nodeValue||"",c=!0}return c}this.pageLoad=function(){for(var e=document.getElementById("post-body")||document.body||document.documentElement,t=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,{acceptNode:function(e){if(!e.nodeValue||!e.nodeValue.trim())return NodeFilter.FILTER_REJECT;for(var t=e.parentNode;t;){var n=(t.nodeName||"").toLowerCase();if("script"===n||"style"===n||"template"===n)return NodeFilter.FILTER_REJECT;t=t.parentNode}return NodeFilter.FILTER_ACCEPT}}),n,o=[];n=t.nextNode();)o.push(n);for(var r=0;r<o.length;r++)s(o[r])}}var t=new e;"complete"===document.readyState||"interactive"===document.readyState?t.pageLoad():document.addEventListener("DOMContentLoaded",function(){t.pageLoad()})}();
+(function(){
+  // 1) Cari kontainer yang hanya ada di dalam amp-script
+  const root = document.getElementById('amp-post-body');
+  if (!root) return;
+
+  // 2) Penanda untuk debug cepat
+  root.setAttribute('data-alkitab-ready','1');
+
+  // 3) Daftar singkatan & nama kitab umum (Indonesia)
+  //   Tambah/kurangi sesuai kebutuhanmu
+  const books = [
+    // Pentateukh
+    'Kej(?:adian)?','Kel(?:uaran)?','Im(?:amat)?','Bil(?:angan)?','Ul(?:angan)?',
+    // Sejarah
+    'Yos(?:ua)?','Hak(?:im-hakim|im)?','Rut','1\\s*Sam(?:uel)?','2\\s*Sam(?:uel)?',
+    '1\\s*Raj(?:a-raja|a)?','2\\s*Raj(?:a-raja|a)?','1\\s*Taw(?:arikh)?','2\\s*Taw(?:arikh)?',
+    'Ezr(?:a)?','Neh(?:emia)?','Est(?:er)?',
+    // Puisi
+    'Ayb(?:ub)?','Mzm|Maz(?:mur)?','Ams(?:al)?','Pkh|Peng(?:khotbah)?','Kid(?:ung)?',
+    // Nabi
+    'Yes(?:aya)?','Yer(?:emia)?','Rat(?:apan)?','Yeh(?:ezekiel)?','Dan(?:iel)?',
+    'Hos(?:ea)?','Yoel','Am(?:os)?','Ob(?:aja)?','Yun(?:us)?','Mi(?:kha)?','Nah(?:um)?',
+    'Hab(?:akuk)?','Zef(?:anya)?','Hag(?:ai)?','Zak(?:h?aria)?','Mal(?:akhi)?',
+    // Injil & Kisah
+    'Mat(?:eus)?','Mrk|Mar(?:kus)?','Luk(?:as)?','Yoh(?:anes)?','Kis(?:ah Para Rasul)?',
+    // Surat Paulus
+    'Rm|Rom(?:a)?','1\\s*Kor(?:intus)?','2\\s*Kor(?:intus)?','Gal(?:atia)?','Ef(?:esus)?',
+    'Flp|Fil(?:ipi)?','Kol(?:ose)?','1\\s*Tes(?:alonika)?','2\\s*Tes(?:alonika)?',
+    '1\\s*Tim(?:otius)?','2\\s*Tim(?:otius)?','Tit(?:us)?','File(?:mon)?',
+    // Surat umum
+    'Ibr(?:ani)?','Yak(?:obus)?','1\\s*Ptr|1\\s*Pet(?:rus)?','2\\s*Ptr|2\\s*Pet(?:rus)?',
+    '1\\s*Yoh(?:anes)?','2\\s*Yoh(?:anes)?','3\\s*Yoh(?:anes)?','Yud(?:as)?',
+    // Wahyu
+    'Why|Wah(?:yu)?'
+  ];
+
+  // 4) Regex ayat: KITAB [spasi opsional]PASAL:AYAT(-AYAT)? (support en dash/em dash/hyphen)
+  const dash = '[\\-–—]';
+  const sp = '[\\s\\u00A0]*'; // include non-breaking space
+  const refRe = new RegExp(
+    '(' + books.join('|') + ')' + sp +    // nama kitab
+    '(\\d+)' +                            // pasal
+    sp + ':' + sp +
+    '(\\d+)' +                            // ayat awal
+    '(?:' + sp + dash + sp + '(\\d+))?',  // ayat akhir (opsional)
+    'gi'
+  );
+
+  // 5) Util: buat URL tujuan (ganti sesuai layanan ayat favoritmu)
+  function makeHref(book, chap, v1, v2){
+    // Contoh pakai Alkitab.mobi; boleh kamu ganti ke endpoint kamu sendiri
+    let b = book.replace(/\s+/g,' ').trim();
+    return 'https://alkitab.mobi/' +
+           '?q=' + encodeURIComponent(`${b} ${chap}:${v1}${v2?'-'+v2:''}`);
+  }
+
+  // 6) Jalan di semua text node (skip yang di dalam <a>)
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      const p = node.parentNode;
+      if (!p) return NodeFilter.FILTER_REJECT;
+      // Jangan re-proses jika sudah link
+      if (p.nodeName === 'A') return NodeFilter.FILTER_REJECT;
+      // Hindari kode/pre
+      const tag = p.closest ? p.closest('code,pre,script,style,amp-script') : null;
+      if (tag) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  let total = 0;
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+
+  nodes.forEach(textNode=>{
+    const text = textNode.nodeValue;
+    if (!refRe.test(text)) return; // cepat
+    refRe.lastIndex = 0;
+
+    // Buat wrapper fragment
+    const frag = document.createDocumentFragment();
+    let lastIndex = 0;
+    let match;
+    while ((match = refRe.exec(text)) !== null){
+      const [full, book, chap, v1, v2] = match;
+
+      // teks sebelum match
+      if (match.index > lastIndex){
+        frag.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      }
+
+      // buat link
+      const a = document.createElement('a');
+      a.setAttribute('href', makeHref(book, chap, v1, v2));
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.textContent = full;
+      frag.appendChild(a);
+      total++;
+      lastIndex = match.index + full.length;
+    }
+
+    // sisa teks
+    if (lastIndex < text.length){
+      frag.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+
+    // Ganti node
+    textNode.parentNode.replaceChild(frag, textNode);
+  });
+
+  root.setAttribute('data-alkitab-matches', String(total));
+})();
