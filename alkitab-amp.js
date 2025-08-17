@@ -4,7 +4,7 @@
   // ====== CONFIG ======
   function buildUrl(refText) {
     var q = encodeURIComponent(refText.trim());
-    return 'https://alkitab.sabda.org/passage.php?passage=' + q;
+    return 'https://alkitab.mobi/passage.php?passage=' + q;
   }
 
   // ====== NodeFilter fallback (AMP worker) ======
