@@ -2,10 +2,14 @@
   'use strict';
 
   // ====== CONFIG: tujuan link ======
-  function buildUrl(refText) {
-    var q = encodeURIComponent(refText.trim());
-    return 'https://alkitab.mobi/passage.php?passage=' + q;
-  }
+function buildUrl(refText, versi) {
+  // versi: 'tb', 'bis', dll. default 'tb'
+  versi = versi || 'tb';
+  // rapikan spasi & encode
+  var q = encodeURIComponent(refText.replace(/\s+/g, ' ').trim());
+  // format alkitab.mobi: /<versi>/passage/<query>
+  return 'https://alkitab.mobi/' + versi + '/passage/' + q;
+}
 
   // ====== Traversal (tanpa NodeFilter) ======
   var SKIP_TAGS = { A:1, CODE:1, PRE:1, SCRIPT:1, STYLE:1, TEXTAREA:1, SELECT:1 };
