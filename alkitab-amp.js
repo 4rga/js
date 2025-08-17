@@ -2,75 +2,89 @@
   'use strict';
 
   // ====== CONFIG ======
-  // Tujuan link (bisa diganti bible.com dsb)
   function buildUrl(refText) {
     var q = encodeURIComponent(refText.trim());
     return 'https://alkitab.sabda.org/passage.php?passage=' + q;
   }
 
-  // ====== UTIL: NodeFilter fallback (AMP worker DOM) ======
+  // ====== NodeFilter fallback (AMP worker) ======
   var SHOW_TEXT = (self.NodeFilter && self.NodeFilter.SHOW_TEXT) ? self.NodeFilter.SHOW_TEXT : 4;
 
-  // ====== Traversal: kumpulkan semua text node yang boleh dimodif ======
-  var SKIP_TAGS = {
-    'A': 1, 'CODE': 1, 'PRE': 1, 'SCRIPT': 1, 'STYLE': 1, 'TEXTAREA': 1, 'SELECT': 1
-  };
-  function isAmpTag(tagName) {
-    return tagName && tagName.toLowerCase().indexOf('amp-') === 0;
-  }
-  function shouldSkipElement(el) {
-    if (!el || el.nodeType !== 1) return true; // bukan element
+  // ====== Traversal setup ======
+  var SKIP_TAGS = { 'A':1, 'CODE':1, 'PRE':1, 'SCRIPT':1, 'STYLE':1, 'TEXTAREA':1, 'SELECT':1 };
+  function isAmpTag(tn){ return tn && tn.toLowerCase().indexOf('amp-') === 0; }
+  function shouldSkipElement(el){
+    if (!el || el.nodeType !== 1) return true;
     var tn = el.tagName;
     if (SKIP_TAGS[tn]) return true;
     if (isAmpTag(tn)) return true;
     return false;
   }
-  function forEachTextNode(rootEl, cb) {
+  function forEachTextNode(rootEl, cb){
     var stack = [rootEl];
-    while (stack.length) {
+    while (stack.length){
       var el = stack.pop();
       if (!el || el.nodeType !== 1) continue;
-      // lewati subtree yang tidak boleh
       if (shouldSkipElement(el) && el !== rootEl) continue;
 
-      for (var i = 0; i < el.childNodes.length; i++) {
-        var node = el.childNodes[i];
-        if (node.nodeType === 3) {
-          cb(node);
-        } else if (node.nodeType === 1) {
-          // hindari masuk ke <a>, <code>, <pre>, amp-*
-          if (!shouldSkipElement(node)) stack.push(node);
+      for (var i=0;i<el.childNodes.length;i++){
+        var n = el.childNodes[i];
+        if (n.nodeType === 3){
+          cb(n);
+        } else if (n.nodeType === 1){
+          if (!shouldSkipElement(n)) stack.push(n);
         }
       }
     }
   }
 
-  // ====== Regex Pola Ayat (ID) ======
-  // Daftar singkatan yang umum dipakai (boleh ditambah sesuai kebutuhan)
+  // ====== Daftar kitab (lengkap & singkatan umum Indonesia) ======
+  // mendukung: titik setelah singkatan (Mrk.), tanpa spasi setelah angka (1Kor), atau pakai spasi (1 Korintus)
   var books =
+    // PL
     'Kej(?:adian)?|Kel(?:uaran)?|Im(?:amat)?|Bil(?:angan)?|Ul(?:angan)?|' +
-    'Yos(?:ua)?|Hak(?:im-hakim)?|Rut|' +
-    '(?:1|I)\\s*Sam|(?:2|II)\\s*Sam|' +
-    '(?:1|I)\\s*Raj|(?:2|II)\\s*Raj|' +
-    '(?:1|I)\\s*Taw|(?:2|II)\\s*Taw|' +
-    'Ezr(?:a)?|Neh(?:emia)?|Est(?:er)?|Ayb|Mzm|Ams|Pkh|Kid|' +
-    'Yes(?:aya)?|Yer(?:emia)?|Rat|Yeh(?:eziel)?|Dan(?:iel)?|Hos(?:ea)?|Yoel|Am(?:os)?|Obd|Yun(?:us)?|Mi(?:kha)?|Nah(?:um)?|Hab(?:akuk)?|Zef(?:anya)?|Hag(?:ai)?|Za(?:karia)?|Mal(?:akhi)?|' +
-    'Mat(?:eus)?|Mrk|Mr(?:kus)?|Markus|Luk(?:as)?|Yoh(?:anes)?|Kis(?:ah Para Rasul)?|' +
-    'Rm|Rom(?:a)?|' +
-    '(?:1|I)\\s*Kor|(?:2|II)\\s*Kor|Gal|Ef|Flp|Filipi|Kol|' +
-    '(?:1|I)\\s*Tes|(?:2|II)\\s*Tes|' +
-    '(?:1|I)\\s*Tim|(?:2|II)\\s*Tim|Tit|Flm|Filemon|Ibr|Ibrani|Yak|Yakobus|' +
-    '(?:1|I)\\s*Ptr|(?:2|II)\\s*Ptr|Petrus|' +
-    '(?:1|I)\\s*Yoh|(?:2|II)\\s*Yoh|(?:3|III)\\s*Yoh|' +
+    'Yos(?:ua)?|Hak(?:im-?hakim)?|Rut|' +
+    '(?:1|I)\\s*Sam(?:uel)?|(?:2|II)\\s*Sam(?:uel)?|' +
+    '(?:1|I)\\s*Raj(?:a-?raja)?|(?:2|II)\\s*Raj(?:a-?raja)?|' +
+    '(?:1|I)\\s*Taw(?:arikh)?|(?:2|II)\\s*Taw(?:arikh)?|' +
+    'Ezr(?:a)?|Neh(?:emia)?|Est(?:er)?|Ayb|Ayub|Mzm|Mazmur|Ams|Amsal|Pkh|Pengkhotbah|Kid|Kidung\\s*Agung|' +
+    'Yes(?:aya)?|Yer(?:emia)?|Rat(?:ap)?|Yeh(?:ez(?:k)?iel)?|Dan(?:iel)?|Hos(?:ea)?|Yoel|Am(?:os)?|Ob(?:adya)?|Yun(?:us)?|Mi(?:kha)?|Nah(?:um)?|Hab(?:akuk)?|Zef(?:anya)?|Hag(?:ai)?|Za(?:karia)?|Mal(?:akhi)?|' +
+    // PB
+    'Mat(?:eus)?|Mrk\\.?|Mr(?:kus)?|Markus|Luk(?:as)?|Yoh(?:anes)?|' +
+    'Kis(?:ah(?:\\s*Para\\s*Rasul)?)?|' +
+    'Rm|Rom(?:a)?|Roma|' +
+    '(?:1|I)\\s*Kor(?:intus)?|(?:2|II)\\s*Kor(?:intus)?|' +
+    'Gal(?:atia)?|Ef(?:esus)?|Flp|Fil(?:ipi)?|Kol(?:ose)?|' +
+    '(?:1|I)\\s*Tes(?:alonika)?|(?:2|II)\\s*Tes(?:alonika)?|' +
+    '(?:1|I)\\s*Tim(?:otius)?|(?:2|II)\\s*Tim(?:otius)?|Tit(?:us)?|Flm|Filemon|' +
+    'Ibr(?:ani)?|Yak(?:obus)?|' +
+    '(?:1|I)\\s*Ptr|(?:2|II)\\s*Ptr|(?:1|I)\\s*Petrus|(?:2|II)\\s*Petrus|' +
+    '(?:1|I)\\s*Yoh(?:anes)?|(?:2|II)\\s*Yoh(?:anes)?|(?:3|III)\\s*Yoh(?:anes)?|' +
     'Yud(?:as)?|Why|Wahyu';
 
-  // Bentuk yang didukung (contoh): "Yoh 3:16", "Matius 5", "1 Kor 13:4-7"
-  // Grup:
-  // 1 = nama kitab, 2 = pasal, 3 = ayat awal (opsional), 4 = ayat akhir (opsional)
+  // Titik opsional setelah singkatan: ubah "Mrk" -> "Mrk\\.?" via post-proses sederhana
+  books = books.replace(/([A-Za-z]{2,3})(\\\?:)?/g, '$1$2');
+
+  // ====== Regex ayat ======
+  // Bentuk: [angka optional] Kitab [spasi optional] Pasal [: Ayat[-Ayat]].
+  // Menangkap: "1Kor 13:4-7", "1 Korintus 13:4–7", "Efesus 2:8-9", "Mrk. 1:1", "Roma 8", "Yoh 3:16".
   var verseRe = new RegExp(
-    '\\b(' + books + ')\\s+(\\d{1,3})(?::(\\d{1,3})(?:[-–](\\d{1,3}))?)?\\b',
-    'gi'
-  );
+    // ^— tidak dipakai, biar bisa muncul di tengah kalimat
+    '(?:^|[^\\w])' +                // left boundary longgar (bukan huruf/angka) biar "Mat 5:9" tetap kena di dalam kalimat
+    '(' +
+      '(?:(?:1|I|2|II|3|III)\\s*)?' + // ordinal opsional
+      '(?:' + books + ')' +          // nama kitab
+      '\\.?' +                       // titik opsional setelah singkatan (Mrk.)
+    ')' +
+    '\\s*' +                         // spasi opsional antara kitab dan pasal
+    '(\\d{1,3})' +                   // pasal
+    '(?:' +
+      '\\s*:\\s*' +                  // : ayat
+      '(\\d{1,3})' +                 // ayat awal
+      '(?:\\s*[-–]\\s*(\\d{1,3}))?' +// rentang ayat opsional
+    ')?' +
+    '(?![\\w])'                      // right boundary longgar
+  , 'gim');
 
   function makeLink(refText) {
     var a = document.createElement('a');
@@ -83,60 +97,53 @@
 
   function linkifyTextNode(tn) {
     var txt = tn.nodeValue;
-    if (!txt || !verseRe.test(txt)) {
-      // reset lastIndex (karena pakai /g)
-      verseRe.lastIndex = 0;
-      return;
-    }
-    verseRe.lastIndex = 0;
+    if (!txt) return 0;
 
-    var frag = document.createDocumentFragment();
-    var lastIdx = 0;
-    var m;
+    var outFrag = document.createDocumentFragment();
+    var last = 0, made = 0, m;
+
+    verseRe.lastIndex = 0;
     while ((m = verseRe.exec(txt)) !== null) {
-      var start = m.index;
-      var end = verseRe.lastIndex;
+      var start = m.index + (m[0].length - m[0].replace(/^\s*/, '').length); // tidak dipakai ketat; kita pakai blok di bawah saja
+      var matchStart = m.index;
+      var matchEnd   = verseRe.lastIndex;
 
       // teks sebelum match
-      if (start > lastIdx) {
-        frag.appendChild(document.createTextNode(txt.slice(lastIdx, start)));
+      if (matchStart > last) {
+        outFrag.appendChild(document.createTextNode(txt.slice(last, matchStart)));
       }
 
-      // teks yang di-link
-      var matchedText = txt.slice(start, end); // tampilkan sama persis
-      frag.appendChild(makeLink(matchedText));
-
-      lastIdx = end;
+      var matchedText = txt.slice(matchStart, matchEnd);
+      outFrag.appendChild(makeLink(matchedText.trim()));
+      last = matchEnd;
+      made++;
     }
-    // sisa teks
-    if (lastIdx < txt.length) {
-      frag.appendChild(document.createTextNode(txt.slice(lastIdx)));
+    if (made > 0) {
+      if (last < txt.length) outFrag.appendChild(document.createTextNode(txt.slice(last)));
+      tn.parentNode.replaceChild(outFrag, tn);
     }
-
-    // ganti node
-    tn.parentNode.replaceChild(frag, tn);
+    return made;
   }
 
   function runLinkifier() {
     var root = document.getElementById('amp-post-body');
-    if (!root) return;
-    forEachTextNode(root, linkifyTextNode);
+    if (!root) return 0;
+    var total = 0;
+    forEachTextNode(root, function(n){ total += linkifyTextNode(n) || 0; });
+    try { console.log('[alkitab-amp] total link dibuat:', total); } catch(e){}
+    return total;
   }
 
-  // ====== MODE: otomatis atau perlu klik (untuk layout="container") ======
   function init() {
+    // Jika ada tombol manual (opsional)
     var btn = document.getElementById('linkifyBtn');
     if (btn) {
-      btn.addEventListener('click', function () {
-        runLinkifier();
-      });
-    } else {
-      // Tanpa tombol: jalan otomatis (cocok untuk layout="fixed-height")
-      runLinkifier();
+      btn.addEventListener('click', function(){ runLinkifier(); });
     }
+    // Fixed-height: jalankan otomatis
+    runLinkifier();
   }
 
-  // Jalankan setelah DOM siap di scope amp-script
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
