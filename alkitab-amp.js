@@ -15,15 +15,15 @@
   }
 })();
 
-/* ===== Konfigurasi tujuan link ===== */
-var TARGET = 'theo';   // 'theo' => ke theoweb; selain itu => alkitab.mobi
-var ALC_TB = 'tb';     // path untuk alkitab.mobi
+/* ===== Konfigurasi ===== */
+var TARGET = 'theo';   // 'theo' => theoweb, selain itu => alkitab.mobi
+var ALC_TB = 'tb';
 
-/* ===== Util string ===== */
+/* ===== Util ===== */
 function normalizeDashes(s){ return s.replace(/[\u2012-\u2015\u2212]/g, '-'); }
 function cleanSpaces(s){ return s.replace(/\s+/g, ' ').trim(); }
 
-/* ===== Builder URL rujukan ayat ===== */
+/* ===== URL builder ===== */
 function buildUrl(raw) {
   var t = cleanSpaces(normalizeDashes(raw));
   if (TARGET === 'theo') {
@@ -34,7 +34,7 @@ function buildUrl(raw) {
   return 'https://alkitab.mobi/' + ALC_TB + '/passage/' + encodeURIComponent(t);
 }
 
-/* ===== Filter node yang tidak dilinkify ===== */
+/* ===== Traversal & skip rules ===== */
 var SKIP_TAGS = { A:1, CODE:1, PRE:1, SCRIPT:1, STYLE:1, TEXTAREA:1, SELECT:1 };
 function isAmpTag(tag){ return tag && tag.toLowerCase().indexOf('amp-') === 0; }
 function shouldSkip(node){
@@ -64,7 +64,7 @@ var verseRe = new RegExp(
   'gim'
 );
 
-/* ===== Buat <a> dan linkify ===== */
+/* ===== Linkify ===== */
 function makeLink(text){
   var a = document.createElement('a');
   a.setAttribute('href', buildUrl(text));
@@ -79,9 +79,7 @@ function linkifyTextNode(node){
   var frag = document.createDocumentFragment(), last = 0, count = 0, m;
   for (verseRe.lastIndex = 0; (m = verseRe.exec(s)) !== null; ) {
     var start = m.index, end = verseRe.lastIndex, slice = s.slice(start, end);
-    if (start > last) {
-      frag.appendChild(document.createTextNode(s.slice(last, start)));
-    }
+    if (start > last) frag.appendChild(document.createTextNode(s.slice(last, start)));
     var lead = (/^[^\w]/).test(slice) ? slice[0] : '';
     var core = lead ? slice.slice(1) : slice;
     if (lead) frag.appendChild(document.createTextNode(lead));
@@ -90,15 +88,19 @@ function linkifyTextNode(node){
     count++;
   }
   if (count > 0) {
-    if (last < s.length) {
-      frag.appendChild(document.createTextNode(s.slice(last)));
-    }
+    if (last < s.length) frag.appendChild(document.createTextNode(s.slice(last)));
     node.parentNode.replaceChild(frag, node);
   }
   return count;
 }
+function linkifyAll(root){
+  if (!root) return 0;
+  var total = 0;
+  forEachTextNode(root, function(n){ total += (linkifyTextNode(n) || 0); });
+  return total;
+}
 
-/* ===== Pemindahan tombol + event klik (patuh aturan AMP) ===== */
+/* ===== Posisikan tombol di bawah gambar pertama (setelah gesture) ===== */
 (function(){
   var btn  = document.getElementById('linkifyBtn');
   var body = document.getElementById('amp-post-body');
@@ -108,14 +110,13 @@ function linkifyTextNode(node){
     if (ref.nextSibling) ref.parentNode.insertBefore(el, ref.nextSibling);
     else ref.parentNode.appendChild(el);
   }
-
-  // cek blok yang mengandung gambar (bukan noscript)
   function containsVisibleImage(el){
     if (!el || el.nodeType !== 1) return false;
     if (el.tagName === 'NOSCRIPT') return false;
     if (el.tagName === 'AMP-IMG' || el.tagName === 'IMG') return true;
     var q = el.querySelector('amp-img, img');
     if (!q) return false;
+    // pastikan bukan di dalam <noscript>
     var p = q.parentNode;
     for (var hop = 0; p && hop < 8; hop++, p = p.parentNode){
       if (p && p.tagName === 'NOSCRIPT') return false;
@@ -123,7 +124,6 @@ function linkifyTextNode(node){
     }
     return true;
   }
-  // anak langsung pertama yang memuat gambar
   function findFirstImageBlock(){
     if (!body) return null;
     var node = body.firstChild;
@@ -133,21 +133,21 @@ function linkifyTextNode(node){
     }
     return null;
   }
-
-  // lakukan pemindahan tombol—dipanggil setelah gesture user
   function moveBtnBelowFirstImage(){
     if (!btn || !body) return false;
     var block = findFirstImageBlock();
     if (!block) return false;
     insertAfter(btn, block);
+    // tampilkan setelah berhasil dipindah
+    try { btn.style.visibility = 'visible'; } catch(e){}
     return true;
   }
 
-  // === Penting: amp-script layout="container" butuh gesture user ===
+  // AMP: mutasi DOM hanya setelah gesture user
   var moved = false;
   function onUserGesture(){
     if (!moved) moved = moveBtnBelowFirstImage();
-    // lepas listener
+    // lepas listener agar hemat
     try {
       document.removeEventListener('click', onUserGesture, true);
       document.removeEventListener('touchstart', onUserGesture, true);
@@ -158,13 +158,7 @@ function linkifyTextNode(node){
   document.addEventListener('touchstart', onUserGesture, true);
   document.addEventListener('keydown', onUserGesture, true);
 
-  // Linkify semua teks saat tombol diklik (atau auto jika tombol tidak ada)
-  function linkifyAll(root){
-    if (!root) return 0;
-    var total = 0;
-    forEachTextNode(root, function(n){ total += (linkifyTextNode(n) || 0); });
-    return total;
-  }
+  // Klik tombol: pastikan sudah dipindah, lalu linkify & disable
   if (btn) {
     btn.addEventListener('click', function(){
       if (!moved) moved = moveBtnBelowFirstImage();
@@ -175,7 +169,7 @@ function linkifyTextNode(node){
       } catch(e){}
     });
   } else {
-    // kalau tombol tidak ada, tetap izinkan linkify saat user berinteraksi
+    // fallback bila tombol tak ada: linkify saat interaksi pertama
     document.addEventListener('click', function(){ linkifyAll(body); }, { once:true, capture:true });
   }
 })();
