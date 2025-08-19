@@ -80,13 +80,13 @@ function linkifyTextNode(node){
     last=end; count++;
   }
   if(count>0){
-    if(last<s.length) frag.appendChild(document.createTextNode(s.slice(last)));
+    if(last<s.length) frag.appendChild(document.createTextNode(s.slice[last)));
     node.parentNode.replaceChild(frag,node);
   }
   return count;
 }
 
-/* ===== Pemindahan tombol + event klik ===== */
+/* ===== Pemindahan tombol + event klik (patuh aturan AMP) ===== */
 (function(){
   var btn  = document.getElementById('linkifyBtn');
   var body = document.getElementById('amp-post-body');
@@ -97,6 +97,7 @@ function linkifyTextNode(node){
     else ref.parentNode.appendChild(el);
   }
 
+  // cek blok yang mengandung gambar (bukan noscript)
   function containsVisibleImage(el){
     if (!el || el.nodeType !== 1) return false;
     if (el.tagName === 'NOSCRIPT') return false;
@@ -110,7 +111,7 @@ function linkifyTextNode(node){
     }
     return true;
   }
-
+  // anak langsung pertama yang memuat gambar
   function findFirstImageBlock(){
     if (!body) return null;
     var node = body.firstChild;
@@ -121,6 +122,7 @@ function linkifyTextNode(node){
     return null;
   }
 
+  // lakukan pemindahan tombol & linkify—dipanggil setelah gesture user
   function moveBtnBelowFirstImage(){
     if (!btn || !body) return false;
     var block = findFirstImageBlock();
@@ -129,13 +131,12 @@ function linkifyTextNode(node){
     return true;
   }
 
-  // ⛔ JANGAN memodifikasi DOM sebelum user gesture.
-  // Kita pasang listener sekali saja: click/touchstart/keydown
+  // === Penting: amp-script layout="container" butuh gesture user ===
+  // Pindahkan tombol saat user pertama kali berinteraksi (klik/tap/keydown)
   var moved = false;
   function onUserGesture(){
-    if (moved) return;
-    moved = moveBtnBelowFirstImage();
-    // lepas semua listener agar hemat
+    if (!moved) moved = moveBtnBelowFirstImage();
+    // lepas listener biar hemat
     try {
       document.removeEventListener('click', onUserGesture, true);
       document.removeEventListener('touchstart', onUserGesture, true);
@@ -146,23 +147,24 @@ function linkifyTextNode(node){
   document.addEventListener('touchstart', onUserGesture, true);
   document.addEventListener('keydown', onUserGesture, true);
 
-  // Linkify semua teks saat tombol diklik (atau auto jika tombol tidak ada)
+  // Klik tombol = pindah (kalau belum) + linkify
   function linkifyAll(root){
     if(!root) return 0;
     var total=0;
     forEachTextNode(root,function(n){ total += (linkifyTextNode(n)||0); });
     return total;
   }
-  if(btn){
+  if (btn) {
     btn.addEventListener('click', function(){
-      var n=linkifyAll(body);
-      try{
-        btn.textContent='✅ Tautan aktif ('+n+')';
+      if (!moved) moved = moveBtnBelowFirstImage();
+      var n = linkifyAll(body);
+      try {
+        btn.textContent = '✅ Tautan aktif (' + n + ')';
         btn.setAttribute('disabled','true');
-      }catch(e){}
+      } catch(e){}
     });
   } else {
-    // fallback: auto-linkify bila tombol tidak ada
-    linkifyAll(body);
+    // kalau tombol tidak ada, tetap izinkan linkify saat user berinteraksi
+    document.addEventListener('click', function(){ linkifyAll(body); }, { once:true, capture:true });
   }
 })();
