@@ -100,7 +100,7 @@ function linkifyAll(root){
   return total;
 }
 
-/* ===== Posisikan tombol di bawah gambar pertama (setelah gesture) ===== */
+/* ===== Posisikan tombol di bawah gambar pertama (SETELAH gesture yang sah) ===== */
 (function(){
   var btn  = document.getElementById('linkifyBtn');
   var body = document.getElementById('amp-post-body');
@@ -133,32 +133,42 @@ function linkifyAll(root){
     }
     return null;
   }
+
+  function revealBtn(){ try{ if(btn) btn.style.visibility = 'visible'; }catch(e){} }
+
   function moveBtnBelowFirstImage(){
-    if (!btn || !body) return false;
+    if (!btn || !body) { revealBtn(); return false; }
     var block = findFirstImageBlock();
-    if (!block) return false;
+    if (!block) { revealBtn(); return false; }
     insertAfter(btn, block);
-    // tampilkan setelah berhasil dipindah
-    try { btn.style.visibility = 'visible'; } catch(e){}
+    revealBtn();
     return true;
   }
 
-  // AMP: mutasi DOM hanya setelah gesture user
+  // ===== HANYA gesture yang diizinkan AMP =====
   var moved = false;
   function onUserGesture(){
     if (!moved) moved = moveBtnBelowFirstImage();
-    // lepas listener agar hemat
-    try {
+    removeGestureListeners();
+  }
+
+  function addGestureListeners(){
+    document.addEventListener('click', onUserGesture, true);
+    document.addEventListener('touchstart', onUserGesture, true);
+    document.addEventListener('keydown', onUserGesture, true);
+    document.addEventListener('pointerdown', onUserGesture, true);
+  }
+  function removeGestureListeners(){
+    try{
       document.removeEventListener('click', onUserGesture, true);
       document.removeEventListener('touchstart', onUserGesture, true);
       document.removeEventListener('keydown', onUserGesture, true);
-    } catch(e){}
+      document.removeEventListener('pointerdown', onUserGesture, true);
+    }catch(e){}
   }
-  document.addEventListener('click', onUserGesture, true);
-  document.addEventListener('touchstart', onUserGesture, true);
-  document.addEventListener('keydown', onUserGesture, true);
+  addGestureListeners();
 
-  // Klik tombol: pastikan sudah dipindah, lalu linkify & disable
+  // Klik tombol -> pastikan sudah dipindah, linkify, lalu UBAH jadi HIJAU & disable
   if (btn) {
     btn.addEventListener('click', function(){
       if (!moved) moved = moveBtnBelowFirstImage();
@@ -166,10 +176,17 @@ function linkifyAll(root){
       try {
         btn.textContent = '✅ Tautan aktif (' + n + ')';
         btn.setAttribute('disabled','true');
+
+        // warna disabled = HIJAU (bukan abu-abu)
+        btn.style.background = '#22c55e';
+        btn.style.opacity = '1';
+        btn.style.color = '#fff';
+        btn.style.cursor = 'default';
+        btn.style.boxShadow = '0 4px 10px rgba(0,0,0,.1)';
       } catch(e){}
     });
   } else {
-    // fallback bila tombol tak ada: linkify saat interaksi pertama
+    // fallback: kalau tombol tidak ada, linkify pada klik pertama halaman
     document.addEventListener('click', function(){ linkifyAll(body); }, { once:true, capture:true });
   }
 })();
