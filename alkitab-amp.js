@@ -97,14 +97,12 @@ function linkifyTextNode(node){
     else ref.parentNode.appendChild(el);
   }
 
-  // cek apakah element (atau turunannya) mengandung gambar yang dirender (skip <noscript>)
   function containsVisibleImage(el){
     if (!el || el.nodeType !== 1) return false;
     if (el.tagName === 'NOSCRIPT') return false;
     if (el.tagName === 'AMP-IMG' || el.tagName === 'IMG') return true;
     var q = el.querySelector('amp-img, img');
     if (!q) return false;
-    // pastikan gambar bukan di dalam <noscript>
     var p = q.parentNode;
     for (var hop=0; p && hop<8; hop++, p=p.parentNode){
       if (p && p.tagName === 'NOSCRIPT') return false;
@@ -113,7 +111,6 @@ function linkifyTextNode(node){
     return true;
   }
 
-  // cari ANAK LANGSUNG pertama dari #amp-post-body yang mengandung gambar
   function findFirstImageBlock(){
     if (!body) return null;
     var node = body.firstChild;
@@ -132,23 +129,22 @@ function linkifyTextNode(node){
     return true;
   }
 
-  // retry beberapa kali (AMP upgrade async)
-  (function retry(n){
-    if (moveBtnBelowFirstImage()) return;
-    if (n <= 0) return;
-    setTimeout(function(){ retry(n-1); }, 180);
-  })(18); // ~3.2s total
-
-  // observer sebentar untuk konten yang terlambat masuk
-  try {
-    if (body && 'MutationObserver' in self) {
-      var mo = new MutationObserver(function(){
-        if (moveBtnBelowFirstImage()) { try { mo.disconnect(); } catch(e){} }
-      });
-      mo.observe(body, {childList:true, subtree:true});
-      setTimeout(function(){ try { mo.disconnect(); } catch(e){} }, 5000);
-    }
-  } catch(e){}
+  // ⛔ JANGAN memodifikasi DOM sebelum user gesture.
+  // Kita pasang listener sekali saja: click/touchstart/keydown
+  var moved = false;
+  function onUserGesture(){
+    if (moved) return;
+    moved = moveBtnBelowFirstImage();
+    // lepas semua listener agar hemat
+    try {
+      document.removeEventListener('click', onUserGesture, true);
+      document.removeEventListener('touchstart', onUserGesture, true);
+      document.removeEventListener('keydown', onUserGesture, true);
+    } catch(e){}
+  }
+  document.addEventListener('click', onUserGesture, true);
+  document.addEventListener('touchstart', onUserGesture, true);
+  document.addEventListener('keydown', onUserGesture, true);
 
   // Linkify semua teks saat tombol diklik (atau auto jika tombol tidak ada)
   function linkifyAll(root){
