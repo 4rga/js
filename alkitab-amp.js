@@ -100,7 +100,7 @@ function linkifyAll(root){
   return total;
 }
 
-/* ===== Posisikan tombol di bawah gambar pertama (setelah gesture) ===== */
+/* ===== Posisikan tombol di bawah gambar pertama (hanya setelah gesture yang diizinkan) ===== */
 (function(){
   var btn  = document.getElementById('linkifyBtn');
   var body = document.getElementById('amp-post-body');
@@ -142,7 +142,7 @@ function linkifyAll(root){
     return true;
   }
 
-  // AMP: mutasi DOM hanya setelah gesture user
+  // HANYA gesture yang diizinkan AMP
   var moved = false;
   function onUserGesture(){
     if (!moved) moved = moveBtnBelowFirstImage();
@@ -150,14 +150,11 @@ function linkifyAll(root){
   }
 
   function addGestureListeners(){
-    var opts = {capture:true, passive:true};
+    // hanya gesture sah: click, touchstart, keydown, pointerdown
     document.addEventListener('click', onUserGesture, true);
     document.addEventListener('touchstart', onUserGesture, true);
     document.addEventListener('keydown', onUserGesture, true);
     document.addEventListener('pointerdown', onUserGesture, true);
-    document.addEventListener('pointermove', onUserGesture, opts);
-    document.addEventListener('mousemove', onUserGesture, opts);
-    document.addEventListener('wheel', onUserGesture, opts);
   }
   function removeGestureListeners(){
     try{
@@ -165,9 +162,6 @@ function linkifyAll(root){
       document.removeEventListener('touchstart', onUserGesture, true);
       document.removeEventListener('keydown', onUserGesture, true);
       document.removeEventListener('pointerdown', onUserGesture, true);
-      document.removeEventListener('pointermove', onUserGesture, true);
-      document.removeEventListener('mousemove', onUserGesture, true);
-      document.removeEventListener('wheel', onUserGesture, true);
     }catch(e){}
   }
   addGestureListeners();
@@ -181,9 +175,9 @@ function linkifyAll(root){
         btn.textContent = '✅ Tautan aktif (' + n + ')';
         btn.setAttribute('disabled','true');
 
-        // 👉 Disabled tetap HIJAU (bukan abu-abu)
-        btn.style.background = '#22c55e';          // hijau solid
-        btn.style.opacity = '1';                   // jangan dipudarkan
+        // Disabled tetap HIJAU (bukan abu-abu)
+        btn.style.background = '#22c55e';
+        btn.style.opacity = '1';
         btn.style.color = '#fff';
         btn.style.cursor = 'default';
         btn.style.boxShadow = '0 4px 10px rgba(0,0,0,.1)';
