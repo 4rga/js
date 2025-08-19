@@ -1,1 +1,178 @@
-'use strict';var _0xbf978d=_0x556e;function _0x556e(_0x44ab48,_0x3d8c6d){var _0x54fc47=_0x54fc();return _0x556e=function(_0x556e9b,_0x31cf3c){_0x556e9b=_0x556e9b-0x1ac;var _0x2ec625=_0x54fc47[_0x556e9b];return _0x2ec625;},_0x556e(_0x44ab48,_0x3d8c6d);}(function(_0x48b9e5,_0x1c6059){var _0x4a84c9=_0x556e,_0x5b6d9b=_0x48b9e5();while(!![]){try{var _0x329307=parseInt(_0x4a84c9(0x1ec))/0x1+parseInt(_0x4a84c9(0x1b1))/0x2+parseInt(_0x4a84c9(0x1ba))/0x3+-parseInt(_0x4a84c9(0x1b8))/0x4+parseInt(_0x4a84c9(0x1d1))/0x5+-parseInt(_0x4a84c9(0x1b9))/0x6*(-parseInt(_0x4a84c9(0x1d7))/0x7)+-parseInt(_0x4a84c9(0x1ee))/0x8*(parseInt(_0x4a84c9(0x1d0))/0x9);if(_0x329307===_0x1c6059)break;else _0x5b6d9b['push'](_0x5b6d9b['shift']());}catch(_0x4fc041){_0x5b6d9b['push'](_0x5b6d9b['shift']());}}}(_0x54fc,0xa1582));(function(){var _0x34d79d=_0x556e;if(!self['__THEO_BRAND_LOGGED__']){self[_0x34d79d(0x1dc)]=!![];try{var _0x774e9c=_0x34d79d(0x1bd),_0x38dbac=_0x34d79d(0x1c9);console[_0x34d79d(0x1da)]('%c'+_0x774e9c+_0x34d79d(0x1e8)+_0x38dbac,_0x34d79d(0x1b5),_0x34d79d(0x1c3));}catch(_0x483f40){}}}());var TARGET=_0xbf978d(0x1d2),ALC_TB='tb';function normalizeDashes(_0x155e8b){var _0xb792e1=_0xbf978d;return _0x155e8b[_0xb792e1(0x1c2)](/[\u2012-\u2015\u2212]/g,'-');}function _0x54fc(){var _0x376f95=['&asal=','355431NeadRc','amp-post-body','8ZdgppL','setAttribute','_blank','disabled','pop','amp-img,\x20figure\x20amp-img,\x20img,\x20figure\x20img','1951838oPtFgn','ch|chr|chron|chronicles|co|cor|corinthians|jhn|jn|jo|joh|john|kgs|ki|kin|kings|kor|korintus|pe|pet|peter|petrus|ptr|raj|raja|raja-raja|sa|sam|samuel|taw|tawarikh|tes|tesalonika|th|the|thes|thess|thessalonians|ti|tim|timothy|timotius|yoh|yohanes|genesis|gen|ge|exodus|exod|exo|ex|leviticus|lev|lv|le|numbers|num|nmb|nu|deuteronomy|deut|deu|dt|de|joshua|josh|jos|judges|judg|jdg|ruth|rut|rth|ru|1\x20samuel|1samuel|1\x20sam|1sam|1\x20sa|1sa|i\x20samuel|i\x20sam|i\x20sa|2\x20samuel|2samuel|2\x20sam|2sam|2\x20sa|2sa|ii\x20samuel|ii\x20sam|ii\x20sa|1\x20kings|1kings|1\x20kin|1kin|1\x20kgs|1kgs|1\x20ki|1ki|i\x20kings|i\x20kin|i\x20kgs|i\x20ki|2\x20kings|2kings|2\x20kin|2kin|2\x20kgs|2kgs|2\x20ki|2ki|ii\x20kings|ii\x20kin|ii\x20kgs|ii\x20ki|1\x20chronicles|1chronicles|1\x20chron|1chron|1\x20chr|1chr|1\x20ch|1ch|i\x20chronicles|i\x20chron|i\x20chr|i\x20ch|2\x20chronicles|2chronicles|2\x20chron|2chron|2\x20chr|2chr|2\x20ch|2ch|ii\x20chronicles|ii\x20chron|ii\x20chr|ii\x20ch|ezra|ezr|nehemiah|neh|nh|ne|nehemia|esther|esth|est|es|ester|job|jb|psalms|psalm|psa|pss|ps|proverbs|proverb|prov|pro|pr|ecclesiastes|eccl|ecc|ec|songs\x20of\x20solomon|songsofsolomon|song\x20of\x20solomon|songofsolomon|song\x20of\x20songs|songofsongs|songs|song|son|sos|so|isaiah|isa|is|jeremiah|jer|je|lamentations|lam|la|ezekiel|ezek|eze|daniel|dan|dn|da|hosea|hos|ho|joel|joe|yl|amos|amo|am|obadiah|oba|ob|jonah|jon|micah|mikha|mic|mi|nahum|nah|na|habakkuk|habakuk|hab|zephaniah|zeph|zep|haggai|hagai|hag|zechariah|zech|zec|za|malachi|mal|matthew|mathew|matt|mat|mt|markus|mark|mar|mrk|mr|mk|luke|luk|lu|lk|john|joh|jhn|jn|acts\x20of\x20the\x20apostles|actsoftheapostles|acts|act|ac|romans|rom|rm|ro|1\x20corinthians|1corinthians|1\x20cor|1cor|1\x20co|1co|i\x20corinthians|i\x20cor|i\x20co|2\x20corinthians|2corinthians|2\x20cor|2cor|2\x20co|2co|ii\x20corinthians|ii\x20cor|ii\x20co|galatians|galatia|gal|ga|ephesians|eph|ep|phillippians|philippians|phill|phil|phi|php|ph|colossians|col|co|1\x20thessalonians|1thessalonians|1\x20thess|1thess|1\x20thes|1thes|1\x20the|1the|1\x20th|1th|i\x20thessalonians|i\x20thess|i\x20thes|i\x20the|i\x20th|2\x20thessalonians|2thessalonians|2\x20thess|2thess|2\x20thes|2thes|2\x20the|2the|2\x20th|2th|ii\x20thessalonians|ii\x20thess|ii\x20thes|ii\x20the|ii\x20th|1\x20timothy|1timothy|1\x20tim|1tim|1\x20ti|1ti|i\x20timothy|i\x20tim|i\x20ti|2\x20timothy|2timothy|2\x20tim|2tim|2\x20ti|2ti|ii\x20timothy|ii\x20tim|ii\x20ti|titus|tit|philemon|phile|phm|hebrews|heb|he|james|jam|jas|jms|ja|jm|1\x20peter|1peter|1\x20pet|1pet|1\x20pe|1pe|i\x20peter|i\x20pet|i\x20pe|1\x20ptr|1ptr|2\x20peter|2peter|2\x20pet|2pet|2\x20pe|2pe|ii\x20peter|ii\x20pet|ii\x20pe|2\x20ptr|2ptr|1\x20john|1john|1\x20joh|1joh|1\x20jhn|1jhn|1\x20jo|1jo|1\x20jn|1jn|i\x20john|i\x20joh|i\x20jhn|i\x20jo|i\x20jn|2\x20john|2john|2\x20joh|2joh|2\x20jhn|2jhn|2\x20jo|2jo|2\x20jn|2jn|ii\x20john|ii\x20joh|ii\x20jhn|ii\x20jo|ii\x20jn|3\x20john|3john|3\x20joh|3joh|3\x20jhn|3jhn|3\x20jo|3jo|3\x20jn|3jn|iii\x20john|iii\x20joh|iii\x20jhn|iii\x20jo|iii\x20jn|jude|jud|ju|revelations|revelation|rev|re|rv|kejadian|kej|kel|keluaran|im|imamat|bil|bilangan|ul|ulangan|yos|yosua|hak|hakim-hakim|rut|ru|1\x20samuel|1samuel|1\x20sam|1sam|1\x20sa|1sa|i\x20samuel|i\x20sam|i\x20sa|2\x20samuel|2samuel|2\x20sam|2sam|2\x20sa|2sa|ii\x20samuel|ii\x20sam|ii\x20sa|1\x20raj|1\x20raja|1raj|1raja|1\x20raja-raja|1raja-raja|2\x20raj|2\x20raja|2raj|2raja|2\x20raja-raja|2raja-raja|i\x20raj|i\x20raja|iraj|iraja|i\x20raja-raja|iraja-raja|ii\x20raj|ii\x20raja|iiraj|iiraja|ii\x20raja-raja|iiraja-raja|1\x20tawarikh|1tawarikh|1\x20taw|1taw|i\x20tawarikh|i\x20taw|2\x20tawarikh|2tawarikh|2\x20taw|2taw|ii\x20tawarikh|ii\x20taw|ezra|ezr|neh|nh|ne|nehemia|est|es|ester|ayub|ayb|ay|mazmur|maz|mzm|amsal|ams|pengkhotbah|pkh|kidung\x20agung|kidungagung|kid|yesaya|yes|yeremia|yer|ratapan|rat|yehezkiel|yeh|hosea|hos|ho|yoel|yl|amos|amo|am|obaja|oba|ob|yunus|yun|mikha|mik|mi|nahum|nah|na|habakkuk|habakuk|hab|zefanya|zef|haggai|hagai|hag|zakharia|za|maleakhi|mal|matius|mat|mt|markus|mark|mar|mrk|mr|mk|lukas|luk|lu|lk|yohanes|yoh|kisah\x20para\x20rasul|kisah\x20rasul|kis|roma|rom|rm|ro|1\x20korintus|1korintus|1\x20kor|1kor|2\x20korintus|2korintus|2\x20kor|2kor|i\x20korintus|ikorintus|i\x20kor|ikor|ii\x20korintus|iikorintus|ii\x20kor|iikor|galatia|gal|ga|efesus|ef|filipi|flp|fil|kolose|kol|1\x20tesalonika|1tesalonika|1\x20tes|1tes|i\x20tesalonika|i\x20tes|2\x20tesalonika|2tesalonika|2\x20tes|2tes|ii\x20tesalonika|ii\x20tes|1timotius|1\x20timotius|1\x20tim|1tim|1\x20ti|1ti|i\x20tim|i\x20ti|i\x20timotius|i\x20tim|i\x20ti|2timotius|2\x20timotius|2\x20tim|2tim|2\x20ti|2ti|ii\x20timotius|ii\x20tim|ii\x20ti|titus|tit|filemon|flm|ibrani|ibr|yakobus|yak|1\x20pet|1pet|1\x20pe|1pe|1\x20petrus|1petrus|1\x20ptr|1ptr|2\x20pet|2pet|2\x20pe|2pe|ii\x20peter|ii\x20pet|ii\x20pe|2\x20petrus|2petrus|2\x20ptr|2ptr|1\x20yohanes|1yohanes|1yoh|1\x20yoh|i\x20yohanes|i\x20yoh|2\x20yohanes|2yohanes|ii\x20yohanes|ii\x20yoh|2yoh|2\x20yoh|3\x20yohanes|3yohanes|3yoh|3\x20yoh|iii\x20yohanes|iii\x20yoh|yudas|yud|wahyu|why','exec','test','background:#111;color:#0ff;padding:2px\x206px;border-radius:3px;font-weight:700','gim','push','1459068ogTcmt','5219886xRnteO','565863sElzNy','lastIndex','nofollow\x20noopener\x20noreferrer','Theoweb.Dev','insertBefore','appendChild','indexOf','(?:^|[^\x5cw])(','replace','color:#06c;text-decoration:underline','index','nodeType','textContent','replaceChild','amp-','https://theo.my.id','createTextNode','querySelector','href','childNodes','https://www.theo.my.id/p/pencarian-alkitab.html?proses=','target','21223809ZWGoQw','4969410RTJEKK','theo','nextSibling','createDocumentFragment','toLowerCase','rel','7NNuXUX','\x5cs*','click','log','nodeValue','__THEO_BRAND_LOGGED__','linkifyBtn','length','getElementById','[-\x5cs]?','true','trim','parentNode','addEventListener','tagName','https://alkitab.mobi/','createElement','\x20%c','slice','(?:'];_0x54fc=function(){return _0x376f95;};return _0x54fc();}function cleanSpaces(_0x53bcb1){var _0x2118c5=_0xbf978d;return _0x53bcb1[_0x2118c5(0x1c2)](/\s+/g,'\x20')[_0x2118c5(0x1e2)]();}function buildUrl(_0x1e859e){var _0x235546=_0xbf978d,_0x35ead7=cleanSpaces(normalizeDashes(_0x1e859e));if(TARGET===_0x235546(0x1d2)){var _0x3f77b8=encodeURIComponent(_0x35ead7),_0x2c0d9b=encodeURIComponent(self['location'][_0x235546(0x1cc)]||'');return _0x235546(0x1ce)+_0x3f77b8+_0x235546(0x1eb)+_0x2c0d9b;}return _0x235546(0x1e6)+ALC_TB+'/passage/'+encodeURIComponent(_0x35ead7);}var SKIP_TAGS={'A':0x1,'CODE':0x1,'PRE':0x1,'SCRIPT':0x1,'STYLE':0x1,'TEXTAREA':0x1,'SELECT':0x1};function isAmpTag(_0x1321f1){var _0x4bb8c5=_0xbf978d;return _0x1321f1&&_0x1321f1[_0x4bb8c5(0x1d5)]()[_0x4bb8c5(0x1c0)](_0x4bb8c5(0x1c8))===0x0;}function shouldSkip(_0xf46dde){var _0x3d93af=_0xbf978d;if(!_0xf46dde||_0xf46dde['nodeType']!==0x1)return!![];var _0x253437=_0xf46dde[_0x3d93af(0x1e5)];return!!SKIP_TAGS[_0x253437]||isAmpTag(_0x253437);}function forEachTextNode(_0x2fd93e,_0x25e680){var _0x1e5577=_0xbf978d,_0x2c26cd=[_0x2fd93e];while(_0x2c26cd[_0x1e5577(0x1de)]){var _0x3c327e=_0x2c26cd[_0x1e5577(0x1af)]();if(_0x3c327e&&_0x3c327e[_0x1e5577(0x1c5)]===0x1)for(var _0x44204d=0x0;_0x44204d<_0x3c327e[_0x1e5577(0x1cd)][_0x1e5577(0x1de)];_0x44204d++){var _0x1f5a2f=_0x3c327e[_0x1e5577(0x1cd)][_0x44204d];if(_0x1f5a2f[_0x1e5577(0x1c5)]===0x3)_0x25e680(_0x1f5a2f);else _0x1f5a2f[_0x1e5577(0x1c5)]===0x1&&!shouldSkip(_0x1f5a2f)&&_0x2c26cd[_0x1e5577(0x1b7)](_0x1f5a2f);}}}var booksRaw=_0xbf978d(0x1b2),books=_0xbf978d(0x1ea)+booksRaw[_0xbf978d(0x1c2)](/-/g,_0xbf978d(0x1e0))['replace'](/\s+/g,_0xbf978d(0x1d8))+')',verseRe=new RegExp(_0xbf978d(0x1c1)+books+'(?:\x5c.)?)\x5cs*(\x5cd{1,3})(?:\x5cs*:\x5cs*(\x5cd{1,3})(?:\x5cs*[-\x5cu2013\x5cu2014\x5cu2212]\x5cs*(\x5cd{1,3}))?)?(?![\x5cw])',_0xbf978d(0x1b6));function makeLink(_0x5599af){var _0x1a8108=_0xbf978d,_0x2b0110=document[_0x1a8108(0x1e7)]('a');return _0x2b0110[_0x1a8108(0x1ac)]('href',buildUrl(_0x5599af)),_0x2b0110['setAttribute'](_0x1a8108(0x1cf),_0x1a8108(0x1ad)),_0x2b0110[_0x1a8108(0x1ac)](_0x1a8108(0x1d6),_0x1a8108(0x1bc)),_0x2b0110[_0x1a8108(0x1bf)](document['createTextNode'](_0x5599af)),_0x2b0110;}function linkifyTextNode(_0x34519d){var _0x3b240d=_0xbf978d,_0x2e7b26=_0x34519d[_0x3b240d(0x1db)];if(!_0x2e7b26)return 0x0;var _0x54e318=document[_0x3b240d(0x1d4)](),_0x3006a5=0x0,_0x58b757=0x0,_0x32ab87;for(verseRe[_0x3b240d(0x1bb)]=0x0;(_0x32ab87=verseRe[_0x3b240d(0x1b3)](_0x2e7b26))!==null;){var _0x541fce=_0x32ab87[_0x3b240d(0x1c4)],_0x93cbd4=verseRe['lastIndex'],_0x1493e8=_0x2e7b26[_0x3b240d(0x1e9)](_0x541fce,_0x93cbd4);if(_0x541fce>_0x3006a5)_0x54e318[_0x3b240d(0x1bf)](document['createTextNode'](_0x2e7b26['slice'](_0x3006a5,_0x541fce)));var _0x3dd42=/^[^\w]/[_0x3b240d(0x1b4)](_0x1493e8)?_0x1493e8[0x0]:'',_0xeac7ef=_0x3dd42?_0x1493e8[_0x3b240d(0x1e9)](0x1):_0x1493e8;if(_0x3dd42)_0x54e318[_0x3b240d(0x1bf)](document['createTextNode'](_0x3dd42));_0x54e318['appendChild'](makeLink(_0xeac7ef['trim']())),_0x3006a5=_0x93cbd4,_0x58b757++;}if(_0x58b757>0x0){if(_0x3006a5<_0x2e7b26[_0x3b240d(0x1de)])_0x54e318[_0x3b240d(0x1bf)](document[_0x3b240d(0x1ca)](_0x2e7b26[_0x3b240d(0x1e9)](_0x3006a5)));_0x34519d[_0x3b240d(0x1e3)][_0x3b240d(0x1c7)](_0x54e318,_0x34519d);}return _0x58b757;}(function(){var _0x17384a=_0xbf978d,_0x2504d6=document[_0x17384a(0x1df)](_0x17384a(0x1dd)),_0x53fd6d=document[_0x17384a(0x1df)](_0x17384a(0x1ed));function _0x38ed0e(_0x15c57b,_0x512ff4){var _0x2c3cc0=_0x17384a;if(!_0x512ff4||!_0x512ff4[_0x2c3cc0(0x1e3)]||!_0x15c57b)return;_0x512ff4['nextSibling']?_0x512ff4[_0x2c3cc0(0x1e3)][_0x2c3cc0(0x1be)](_0x15c57b,_0x512ff4[_0x2c3cc0(0x1d3)]):_0x512ff4[_0x2c3cc0(0x1e3)]['appendChild'](_0x15c57b);}function _0xc6cf00(){var _0x2fbbdf=_0x17384a;if(!_0x2504d6||!_0x53fd6d)return;var _0x46c000=_0x53fd6d[_0x2fbbdf(0x1cb)](_0x2fbbdf(0x1b0));if(_0x46c000)_0x38ed0e(_0x2504d6,_0x46c000);}(function _0x3b7df2(_0x2f9d97){var _0x4ffdb6=_0x17384a;if(_0x2f9d97<=0x0)return;var _0x240c80=_0x53fd6d&&_0x53fd6d[_0x4ffdb6(0x1cb)]('amp-img,\x20figure\x20amp-img,\x20img,\x20figure\x20img');if(_0x240c80){_0xc6cf00();return;}setTimeout(function(){_0x3b7df2(_0x2f9d97-0x1);},0x78);}(0xc));function _0x2a93c9(_0x4dc8ce){if(!_0x4dc8ce)return 0x0;var _0x575e79=0x0;return forEachTextNode(_0x4dc8ce,function(_0x47cd0c){_0x575e79+=linkifyTextNode(_0x47cd0c)||0x0;}),_0x575e79;}_0x2504d6?_0x2504d6[_0x17384a(0x1e4)](_0x17384a(0x1d9),function(){var _0x4b9f25=_0x17384a,_0xe01e60=_0x2a93c9(_0x53fd6d);try{_0x2504d6[_0x4b9f25(0x1c6)]='✅\x20Tautan\x20aktif\x20('+_0xe01e60+')',_0x2504d6['setAttribute'](_0x4b9f25(0x1ae),_0x4b9f25(0x1e1));}catch(_0x2af9b2){}}):_0x2a93c9(_0x53fd6d);}());
+'use strict';
+
+/* ===== Branding log (aman di AMP) ===== */
+(function () {
+  if (!self.__THEO_BRAND_LOGGED__) {
+    self.__THEO_BRAND_LOGGED__ = true;
+    try {
+      var brand = "Theoweb.Dev", site = "https://theo.my.id";
+      console.log("%c" + brand + " %c" + site,
+        "background:#111;color:#0ff;padding:2px 6px;border-radius:3px;font-weight:700",
+        "color:#06c;text-decoration:underline");
+    } catch (e) {}
+  }
+})();
+
+/* ===== Konfigurasi tujuan link ===== */
+var TARGET = 'theo';   // 'theo' => ke theoweb; selain itu => alkitab.mobi
+var ALC_TB = 'tb';     // path untuk alkitab.mobi
+
+/* ===== Util string ===== */
+function normalizeDashes(s){ return s.replace(/[\u2012-\u2015\u2212]/g,'-'); }
+function cleanSpaces(s){ return s.replace(/\s+/g,' ').trim(); }
+
+/* ===== Builder URL rujukan ayat ===== */
+function buildUrl(raw) {
+  var t = cleanSpaces(normalizeDashes(raw));
+  if (TARGET === 'theo') {
+    var q = encodeURIComponent(t);
+    var ref = encodeURIComponent(self.location.href || '');
+    return 'https://www.theo.my.id/p/pencarian-alkitab.html?proses=' + q + '&asal=' + ref;
+  }
+  return 'https://alkitab.mobi/' + ALC_TB + '/passage/' + encodeURIComponent(t);
+}
+
+/* ===== Filter node yang tidak dilinkify ===== */
+var SKIP_TAGS = { A:1, CODE:1, PRE:1, SCRIPT:1, STYLE:1, TEXTAREA:1, SELECT:1 };
+function isAmpTag(tag){ return tag && tag.toLowerCase().indexOf('amp-') === 0; }
+function shouldSkip(node){
+  if (!node || node.nodeType !== 1) return true;
+  var t = node.tagName;
+  return !!SKIP_TAGS[t] || isAmpTag(t);
+}
+function forEachTextNode(root, fn) {
+  var stack = [root];
+  while (stack.length) {
+    var el = stack.pop();
+    if (el && el.nodeType === 1) {
+      for (var i=0; i<el.childNodes.length; i++) {
+        var c = el.childNodes[i];
+        if (c.nodeType === 3) fn(c);
+        else if (c.nodeType === 1 && !shouldSkip(c)) stack.push(c);
+      }
+    }
+  }
+}
+
+/* ===== Regex kitab & ayat ===== */
+var booksRaw="ch|chr|chron|chronicles|co|cor|corinthians|jhn|jn|jo|joh|john|kgs|ki|kin|kings|kor|korintus|pe|pet|peter|petrus|ptr|raj|raja|raja-raja|sa|sam|samuel|taw|tawarikh|tes|tesalonika|th|the|thes|thess|thessalonians|ti|tim|timothy|timotius|yoh|yohanes|genesis|gen|ge|exodus|exod|exo|ex|leviticus|lev|lv|le|numbers|num|nmb|nu|deuteronomy|deut|deu|dt|de|joshua|josh|jos|judges|judg|jdg|ruth|rut|rth|ru|1 samuel|1samuel|1 sam|1sam|1 sa|1sa|i samuel|i sam|i sa|2 samuel|2samuel|2 sam|2sam|2 sa|2sa|ii samuel|ii sam|ii sa|1 kings|1kings|1 kin|1kin|1 kgs|1kgs|1 ki|1ki|i kings|i kin|i kgs|i ki|2 kings|2kings|2 kin|2kin|2 kgs|2kgs|2 ki|2ki|ii kings|ii kin|ii kgs|ii ki|1 chronicles|1chronicles|1 chron|1chron|1 chr|1chr|1 ch|1ch|i chronicles|i chron|i chr|i ch|2 chronicles|2chronicles|2 chron|2chron|2 chr|2chr|2 ch|2ch|ii chronicles|ii chron|ii chr|ii ch|ezra|ezr|nehemiah|neh|nh|ne|nehemia|esther|esth|est|es|ester|job|jb|psalms|psalm|psa|pss|ps|proverbs|proverb|prov|pro|pr|ecclesiastes|eccl|ecc|ec|songs of solomon|songsofsolomon|song of solomon|songofsolomon|song of songs|songofsongs|songs|song|son|sos|so|isaiah|isa|is|jeremiah|jer|je|lamentations|lam|la|ezekiel|ezek|eze|daniel|dan|dn|da|hosea|hos|ho|joel|joe|yl|amos|amo|am|obadiah|oba|ob|jonah|jon|micah|mikha|mic|mi|nahum|nah|na|habakkuk|habakuk|hab|zephaniah|zeph|zep|haggai|hagai|hag|zechariah|zech|zec|za|malachi|mal|matthew|mathew|matt|mat|mt|markus|mark|mar|mrk|mr|mk|luke|luk|lu|lk|john|joh|jhn|jn|acts of the apostles|actsoftheapostles|acts|act|ac|romans|rom|rm|ro|1 corinthians|1corinthians|1 cor|1cor|1 co|1co|i corinthians|i cor|i co|2 corinthians|2corinthians|2 cor|2cor|2 co|2co|ii corinthians|ii cor|ii co|galatians|galatia|gal|ga|ephesians|eph|ep|phillippians|philippians|phill|phil|phi|php|ph|colossians|col|co|1 thessalonians|1thessalonians|1 thess|1thess|1 thes|1thes|1 the|1the|1 th|1th|i thessalonians|i thess|i thes|i the|i th|2 thessalonians|2thessalonians|2 thess|2thess|2 thes|2thes|2 the|2the|2 th|2th|ii thessalonians|ii thess|ii thes|ii the|ii th|1 timothy|1timothy|1 tim|1tim|1 ti|1ti|i timothy|i tim|i ti|2 timothy|2timothy|2 tim|2tim|2 ti|2ti|ii timothy|ii tim|ii ti|titus|tit|philemon|phile|phm|hebrews|heb|he|james|jam|jas|jms|ja|jm|1 peter|1peter|1 pet|1pet|1 pe|1pe|i peter|i pet|i pe|1 ptr|1ptr|2 peter|2peter|2 pet|2pet|2 pe|2pe|ii peter|ii pet|ii pe|2 ptr|2ptr|1 john|1john|1 joh|1joh|1 jhn|1jhn|1 jo|1jo|1 jn|1jn|i john|i joh|i jhn|i jo|i jn|2 john|2john|2 joh|2joh|2 jhn|2jhn|2 jo|2jo|2 jn|2jn|ii john|ii joh|ii jhn|ii jo|ii jn|3 john|3john|3 joh|3joh|3 jhn|3jhn|3 jo|3jo|3 jn|3jn|iii john|iii joh|iii jhn|iii jo|iii jn|jude|jud|ju|revelations|revelation|rev|re|rv|kejadian|kej|kel|keluaran|im|imamat|bil|bilangan|ul|ulangan|yos|yosua|hak|hakim-hakim|rut|ru|1 samuel|1samuel|1 sam|1sam|1 sa|1sa|i samuel|i sam|i sa|2 samuel|2samuel|2 sam|2sam|2 sa|2sa|ii samuel|ii sam|ii sa|1 raj|1 raja|1raj|1raja|1 raja-raja|1raja-raja|2 raj|2 raja|2raj|2raja|2 raja-raja|2raja-raja|i raj|i raja|iraj|iraja|i raja-raja|iraja-raja|ii raj|ii raja|iiraj|iiraja|ii raja-raja|iiraja-raja|1 tawarikh|1tawarikh|1 taw|1taw|i tawarikh|i taw|2 tawarikh|2tawarikh|2 taw|2taw|ii tawarikh|ii taw|ezra|ezr|neh|nh|ne|nehemia|est|es|ester|ayub|ayb|ay|mazmur|maz|mzm|amsal|ams|pengkhotbah|pkh|kidung agung|kidungagung|kid|yesaya|yes|yeremia|yer|ratapan|rat|yehezkiel|yeh|hosea|hos|ho|yoel|yl|amos|amo|am|obaja|oba|ob|yunus|yun|mikha|mik|mi|nahum|nah|na|habakkuk|habakuk|hab|zefanya|zef|haggai|hagai|hag|zakharia|za|maleakhi|mal|matius|mat|mt|markus|mark|mar|mrk|mr|mk|lukas|luk|lu|lk|yohanes|yoh|kisah para rasul|kisah rasul|kis|roma|rom|rm|ro|1 korintus|1korintus|1 kor|1kor|2 korintus|2korintus|2 kor|2kor|i korintus|ikorintus|i kor|ikor|ii korintus|iikorintus|ii kor|iikor|galatia|gal|ga|efesus|ef|filipi|flp|fil|kolose|kol|1 tesalonika|1tesalonika|1 tes|1tes|i tesalonika|i tes|2 tesalonika|2tesalonika|2 tes|2tes|ii tesalonika|ii tes|1timotius|1 timotius|1 tim|1tim|1 ti|1ti|i tim|i ti|i timotius|i tim|i ti|2timotius|2 timotius|2 tim|2tim|2 ti|2ti|ii timotius|ii tim|ii ti|titus|tit|filemon|flm|ibrani|ibr|yakobus|yak|1 pet|1pet|1 pe|1pe|1 petrus|1petrus|1 ptr|1ptr|2 pet|2pet|2 pe|2pe|ii peter|ii pet|ii pe|2 petrus|2petrus|2 ptr|2ptr|1 yohanes|1yohanes|1yoh|1 yoh|i yohanes|i yoh|2 yohanes|2yohanes|ii yohanes|ii yoh|2yoh|2 yoh|3 yohanes|3yohanes|3yoh|3 yoh|iii yohanes|iii yoh|yudas|yud|wahyu|why";
+var books="(?:"+booksRaw.replace(/-/g,"[-\\s]?").replace(/\s+/g,"\\s*")+")";
+var verseRe=new RegExp('(?:^|[^\\w])('+(books)+'(?:\\.)?)\\s*(\\d{1,3})(?:\\s*:\\s*(\\d{1,3})(?:\\s*[-\\u2013\\u2014\\u2212]\\s*(\\d{1,3}))?)?(?![\\w])','gim');
+
+/* ===== Buat <a> dan linkify ===== */
+function makeLink(text){
+  var a=document.createElement('a');
+  a.setAttribute('href', buildUrl(text));
+  a.setAttribute('target','_blank');
+  a.setAttribute('rel','nofollow noopener noreferrer');
+  a.appendChild(document.createTextNode(text));
+  return a;
+}
+function linkifyTextNode(node){
+  var s=node.nodeValue; if(!s) return 0;
+  var frag=document.createDocumentFragment(), last=0, count=0, m;
+  for(verseRe.lastIndex=0;(m=verseRe.exec(s))!==null;){
+    var start=m.index, end=verseRe.lastIndex, slice=s.slice(start,end);
+    if(start>last) frag.appendChild(document.createTextNode(s.slice(last,start)));
+    var lead=/^[^\w]/.test(slice)?slice[0]:'', core=lead?slice.slice(1):slice;
+    if(lead) frag.appendChild(document.createTextNode(lead));
+    frag.appendChild(makeLink(core.trim()));
+    last=end; count++;
+  }
+  if(count>0){
+    if(last<s.length) frag.appendChild(document.createTextNode(s.slice(last)));
+    node.parentNode.replaceChild(frag,node);
+  }
+  return count;
+}
+
+/* ===== Main: pindah tombol & event klik ===== */
+(function(){
+  var btn  = document.getElementById('linkifyBtn');
+  var body = document.getElementById('amp-post-body');
+
+  /* util: sisipkan setelah element referensi */
+  function insertAfter(el, ref){
+    if(!el||!ref||!ref.parentNode) return;
+    if(ref.nextSibling) ref.parentNode.insertBefore(el, ref.nextSibling);
+    else ref.parentNode.appendChild(el);
+  }
+
+  /* temukan <amp-img>/<img> pertama yang benar2 terlihat (bukan dalam <noscript>) */
+  function findFirstVisibleImage(root){
+    if(!root) return null;
+    var list = root.querySelectorAll('amp-img, figure amp-img, p > amp-img, div > amp-img, img, figure img');
+    for(var i=0;i<list.length;i++){
+      var img=list[i];
+      // skip jika berada di dalam <noscript>
+      var p=img.parentNode, inNoscript=false;
+      for(var hop=0; p && hop<8; hop++, p=p.parentNode){
+        if(p && p.tagName==='NOSCRIPT'){ inNoscript=true; break; }
+      }
+      if(inNoscript) continue;
+      // minimal validasi src
+      if(img.getAttribute('src') || img.tagName==='IMG') return img;
+    }
+    return null;
+  }
+
+  /* cari wrapper blok (figure/p/div/a) agar tombol menempel tepat di bawah blok gambar */
+  function findWrapper(el){
+    if(!el) return null;
+    var node=el, WRAPS={FIGURE:1,P:1,DIV:1,A:1};
+    for(var hop=0; node && hop<6; hop++, node=node.parentNode){
+      if(node.nodeType===1){
+        if(WRAPS[node.tagName]) return node;
+        if(node===body) break;
+      }
+    }
+    return el;
+  }
+
+  function moveBtnBelowFirstImage(){
+    if(!btn||!body) return false;
+    var img=findFirstVisibleImage(body);
+    if(!img) return false;
+    var wrap=findWrapper(img)||img;
+    insertAfter(btn, wrap);
+    return true;
+  }
+
+  // retry beberapa kali (AMP bisa upgrade elemen async)
+  (function retry(n){
+    if(moveBtnBelowFirstImage()) return;
+    if(n<=0) return;
+    setTimeout(function(){ retry(n-1); }, 180);
+  })(18); // ~3.2s total
+
+  // observe perubahan DOM sebentar untuk jaga-jaga (misal gambar disisipkan terlambat)
+  try{
+    if(body && 'MutationObserver' in self){
+      var mo=new MutationObserver(function(){
+        if(moveBtnBelowFirstImage()){ try{ mo.disconnect(); }catch(e){} }
+      });
+      mo.observe(body, {childList:true, subtree:true});
+      setTimeout(function(){ try{ mo.disconnect(); }catch(e){} }, 5000);
+    }
+  }catch(e){}
+
+  /* Linkify semua teks saat tombol diklik (atau auto jika tombol tidak ada) */
+  function linkifyAll(root){
+    if(!root) return 0;
+    var total=0;
+    forEachTextNode(root,function(n){ total += (linkifyTextNode(n)||0); });
+    return total;
+  }
+  if(btn){
+    btn.addEventListener('click', function(){
+      var n=linkifyAll(body);
+      try{
+        btn.textContent='✅ Tautan aktif ('+n+')';
+        btn.setAttribute('disabled','true');
+      }catch(e){}
+    });
+  } else {
+    // fallback: auto-linkify jika tombol tidak ada
+    linkifyAll(body);
+  }
+})();
