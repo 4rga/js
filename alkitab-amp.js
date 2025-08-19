@@ -86,80 +86,71 @@ function linkifyTextNode(node){
   return count;
 }
 
-/* ===== Main: pindah tombol & event klik ===== */
+/* ===== Pemindahan tombol + event klik ===== */
 (function(){
   var btn  = document.getElementById('linkifyBtn');
   var body = document.getElementById('amp-post-body');
 
-  /* util: sisipkan setelah element referensi */
   function insertAfter(el, ref){
-    if(!el||!ref||!ref.parentNode) return;
-    if(ref.nextSibling) ref.parentNode.insertBefore(el, ref.nextSibling);
+    if (!el || !ref || !ref.parentNode) return;
+    if (ref.nextSibling) ref.parentNode.insertBefore(el, ref.nextSibling);
     else ref.parentNode.appendChild(el);
   }
 
-  /* temukan <amp-img>/<img> pertama yang benar2 terlihat (bukan dalam <noscript>) */
-  function findFirstVisibleImage(root){
-    if(!root) return null;
-    var list = root.querySelectorAll('amp-img, figure amp-img, p > amp-img, div > amp-img, img, figure img');
-    for(var i=0;i<list.length;i++){
-      var img=list[i];
-      // skip jika berada di dalam <noscript>
-      var p=img.parentNode, inNoscript=false;
-      for(var hop=0; p && hop<8; hop++, p=p.parentNode){
-        if(p && p.tagName==='NOSCRIPT'){ inNoscript=true; break; }
-      }
-      if(inNoscript) continue;
-      // minimal validasi src
-      if(img.getAttribute('src') || img.tagName==='IMG') return img;
+  // cek apakah element (atau turunannya) mengandung gambar yang dirender (skip <noscript>)
+  function containsVisibleImage(el){
+    if (!el || el.nodeType !== 1) return false;
+    if (el.tagName === 'NOSCRIPT') return false;
+    if (el.tagName === 'AMP-IMG' || el.tagName === 'IMG') return true;
+    var q = el.querySelector('amp-img, img');
+    if (!q) return false;
+    // pastikan gambar bukan di dalam <noscript>
+    var p = q.parentNode;
+    for (var hop=0; p && hop<8; hop++, p=p.parentNode){
+      if (p && p.tagName === 'NOSCRIPT') return false;
+      if (p === el) break;
+    }
+    return true;
+  }
+
+  // cari ANAK LANGSUNG pertama dari #amp-post-body yang mengandung gambar
+  function findFirstImageBlock(){
+    if (!body) return null;
+    var node = body.firstChild;
+    while (node){
+      if (node.nodeType === 1 && containsVisibleImage(node)) return node;
+      node = node.nextSibling;
     }
     return null;
   }
 
-/* cari wrapper blok (figure/p/div/a) tapi JANGAN pernah mengembalikan #amp-post-body */
-function findWrapper(el, container){
-  if (!el) return null;
-  var node = el, WRAPS = {FIGURE:1, P:1, DIV:1, A:1};
-  var candidate = null;
-  for (var hop = 0; node && hop < 8; hop++, node = node.parentNode){
-    if (!node || node.nodeType !== 1) break;
-    if (node === container) break;            // stop di container, tapi JANGAN return container
-    if (WRAPS[node.tagName]) { candidate = node; break; }
+  function moveBtnBelowFirstImage(){
+    if (!btn || !body) return false;
+    var block = findFirstImageBlock();
+    if (!block) return false;
+    insertAfter(btn, block);
+    return true;
   }
-  return candidate || el;                     // fallback: pakai elemen gambar itu sendiri
-}
 
-function moveBtnBelowFirstImage(){
-  if (!btn || !body) return false;
-  var img = findFirstVisibleImage(body);
-  if (!img) return false;
-
-  // cari wrapper terdekat SELAIN body
-  var wrap = findWrapper(img, body);
-  if (wrap === body) wrap = img;              // jaga-jaga: jangan pernah body
-  insertAfter(btn, wrap);
-  return true;
-}
-
-  // retry beberapa kali (AMP bisa upgrade elemen async)
+  // retry beberapa kali (AMP upgrade async)
   (function retry(n){
-    if(moveBtnBelowFirstImage()) return;
-    if(n<=0) return;
+    if (moveBtnBelowFirstImage()) return;
+    if (n <= 0) return;
     setTimeout(function(){ retry(n-1); }, 180);
   })(18); // ~3.2s total
 
-  // observe perubahan DOM sebentar untuk jaga-jaga (misal gambar disisipkan terlambat)
-  try{
-    if(body && 'MutationObserver' in self){
-      var mo=new MutationObserver(function(){
-        if(moveBtnBelowFirstImage()){ try{ mo.disconnect(); }catch(e){} }
+  // observer sebentar untuk konten yang terlambat masuk
+  try {
+    if (body && 'MutationObserver' in self) {
+      var mo = new MutationObserver(function(){
+        if (moveBtnBelowFirstImage()) { try { mo.disconnect(); } catch(e){} }
       });
       mo.observe(body, {childList:true, subtree:true});
-      setTimeout(function(){ try{ mo.disconnect(); }catch(e){} }, 5000);
+      setTimeout(function(){ try { mo.disconnect(); } catch(e){} }, 5000);
     }
-  }catch(e){}
+  } catch(e){}
 
-  /* Linkify semua teks saat tombol diklik (atau auto jika tombol tidak ada) */
+  // Linkify semua teks saat tombol diklik (atau auto jika tombol tidak ada)
   function linkifyAll(root){
     if(!root) return 0;
     var total=0;
@@ -175,7 +166,7 @@ function moveBtnBelowFirstImage(){
       }catch(e){}
     });
   } else {
-    // fallback: auto-linkify jika tombol tidak ada
+    // fallback: auto-linkify bila tombol tidak ada
     linkifyAll(body);
   }
 })();
