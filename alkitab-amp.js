@@ -116,6 +116,7 @@ function linkifyAll(root){
     if (el.tagName === 'AMP-IMG' || el.tagName === 'IMG') return true;
     var q = el.querySelector('amp-img, img');
     if (!q) return false;
+    // pastikan bukan di dalam <noscript>
     var p = q.parentNode;
     for (var hop = 0; p && hop < 8; hop++, p = p.parentNode){
       if (p && p.tagName === 'NOSCRIPT') return false;
@@ -132,13 +133,13 @@ function linkifyAll(root){
     }
     return null;
   }
-  function revealBtn(){ try{ if(btn) btn.style.visibility = 'visible'; }catch(e){} }
   function moveBtnBelowFirstImage(){
-    if (!btn || !body) { revealBtn(); return false; }
+    if (!btn || !body) return false;
     var block = findFirstImageBlock();
-    if (!block) { revealBtn(); return false; }
+    if (!block) return false;
     insertAfter(btn, block);
-    revealBtn();
+    // tampilkan setelah berhasil dipindah
+    try { btn.style.visibility = 'visible'; } catch(e){}
     return true;
   }
 
@@ -146,32 +147,16 @@ function linkifyAll(root){
   var moved = false;
   function onUserGesture(){
     if (!moved) moved = moveBtnBelowFirstImage();
-    removeGestureListeners();
-  }
-
-  function addGestureListeners(){
-    // Banyak event agar terasa "langsung": klik, tap, key, mouse move, pointer move, wheel
-    var opts = {capture:true, passive:true};
-    document.addEventListener('click', onUserGesture, true);
-    document.addEventListener('touchstart', onUserGesture, true);
-    document.addEventListener('keydown', onUserGesture, true);
-    document.addEventListener('pointerdown', onUserGesture, true);
-    document.addEventListener('pointermove', onUserGesture, opts);
-    document.addEventListener('mousemove', onUserGesture, opts);
-    document.addEventListener('wheel', onUserGesture, opts);
-  }
-  function removeGestureListeners(){
-    try{
+    // lepas listener agar hemat
+    try {
       document.removeEventListener('click', onUserGesture, true);
       document.removeEventListener('touchstart', onUserGesture, true);
       document.removeEventListener('keydown', onUserGesture, true);
-      document.removeEventListener('pointerdown', onUserGesture, true);
-      document.removeEventListener('pointermove', onUserGesture, true);
-      document.removeEventListener('mousemove', onUserGesture, true);
-      document.removeEventListener('wheel', onUserGesture, true);
-    }catch(e){}
+    } catch(e){}
   }
-  addGestureListeners();
+  document.addEventListener('click', onUserGesture, true);
+  document.addEventListener('touchstart', onUserGesture, true);
+  document.addEventListener('keydown', onUserGesture, true);
 
   // Klik tombol: pastikan sudah dipindah, lalu linkify & disable
   if (btn) {
