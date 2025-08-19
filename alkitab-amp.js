@@ -150,7 +150,6 @@ function linkifyAll(root){
   }
 
   function addGestureListeners(){
-    // Banyak event agar terasa "langsung": klik, tap, key, mouse move, pointer move, wheel
     var opts = {capture:true, passive:true};
     document.addEventListener('click', onUserGesture, true);
     document.addEventListener('touchstart', onUserGesture, true);
@@ -173,7 +172,7 @@ function linkifyAll(root){
   }
   addGestureListeners();
 
-  // Klik tombol: pastikan sudah dipindah, lalu linkify & disable
+  // Klik tombol: pastikan sudah dipindah, linkify, lalu ubah jadi hijau & disable
   if (btn) {
     btn.addEventListener('click', function(){
       if (!moved) moved = moveBtnBelowFirstImage();
@@ -181,6 +180,13 @@ function linkifyAll(root){
       try {
         btn.textContent = '✅ Tautan aktif (' + n + ')';
         btn.setAttribute('disabled','true');
+
+        // 👉 Disabled tetap HIJAU (bukan abu-abu)
+        btn.style.background = '#22c55e';          // hijau solid
+        btn.style.opacity = '1';                   // jangan dipudarkan
+        btn.style.color = '#fff';
+        btn.style.cursor = 'default';
+        btn.style.boxShadow = '0 4px 10px rgba(0,0,0,.1)';
       } catch(e){}
     });
   } else {
