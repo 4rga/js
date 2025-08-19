@@ -116,27 +116,30 @@ function linkifyTextNode(node){
     return null;
   }
 
-  /* cari wrapper blok (figure/p/div/a) agar tombol menempel tepat di bawah blok gambar */
-  function findWrapper(el){
-    if(!el) return null;
-    var node=el, WRAPS={FIGURE:1,P:1,DIV:1,A:1};
-    for(var hop=0; node && hop<6; hop++, node=node.parentNode){
-      if(node.nodeType===1){
-        if(WRAPS[node.tagName]) return node;
-        if(node===body) break;
-      }
-    }
-    return el;
+/* cari wrapper blok (figure/p/div/a) tapi JANGAN pernah mengembalikan #amp-post-body */
+function findWrapper(el, container){
+  if (!el) return null;
+  var node = el, WRAPS = {FIGURE:1, P:1, DIV:1, A:1};
+  var candidate = null;
+  for (var hop = 0; node && hop < 8; hop++, node = node.parentNode){
+    if (!node || node.nodeType !== 1) break;
+    if (node === container) break;            // stop di container, tapi JANGAN return container
+    if (WRAPS[node.tagName]) { candidate = node; break; }
   }
+  return candidate || el;                     // fallback: pakai elemen gambar itu sendiri
+}
 
-  function moveBtnBelowFirstImage(){
-    if(!btn||!body) return false;
-    var img=findFirstVisibleImage(body);
-    if(!img) return false;
-    var wrap=findWrapper(img)||img;
-    insertAfter(btn, wrap);
-    return true;
-  }
+function moveBtnBelowFirstImage(){
+  if (!btn || !body) return false;
+  var img = findFirstVisibleImage(body);
+  if (!img) return false;
+
+  // cari wrapper terdekat SELAIN body
+  var wrap = findWrapper(img, body);
+  if (wrap === body) wrap = img;              // jaga-jaga: jangan pernah body
+  insertAfter(btn, wrap);
+  return true;
+}
 
   // retry beberapa kali (AMP bisa upgrade elemen async)
   (function retry(n){
